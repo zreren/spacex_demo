@@ -2,7 +2,13 @@ import { outlinedInputClasses } from "@mui/material";
 
 export const  muiConfig = {
     components: {
-
+      MuiInputBase :{
+        styleOverrides:{
+          root:{
+           
+          }
+        }
+      },
       MuiTextField: {
         styleOverrides: {
           root: {
@@ -24,12 +30,17 @@ export const  muiConfig = {
       MuiSelect:{
         styleOverrides:{
           select :{
-              color : "white"
+              color : "white",
           },
           notchedOutline: {
             borderWidth : 0
           },
-          
+          root:{
+            '& .MuiSvgIcon-root':{
+              color:"white"
+            },
+            fontSize: 14
+          }
         },
       },
       MuiOutlinedInput: {
@@ -76,6 +87,9 @@ export const  muiConfig = {
             },
             '&.MuiFormLabel-root':{
                 color : "white"
+            },
+            '&.MuiSvgIcon-root':{
+              color:"white"
             },
           },
         },

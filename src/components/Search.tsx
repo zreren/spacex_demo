@@ -1,15 +1,9 @@
-import React, { FC } from "react";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
 
-interface RepositoryOptionProps {
-  onClick?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-}
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
-//   flex: "1",
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   borderRadius: theme.shape.borderRadius,
   "& .MuiInputBase-input": {
