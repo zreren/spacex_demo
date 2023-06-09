@@ -1,5 +1,5 @@
-export type launchStatus = "all" | "true" | "false"
-
+export type LaunchStatus = "all" | "true" | "false"
+export type SortType = "desc" | "asc" 
 
 export interface DetailType {
     links: {

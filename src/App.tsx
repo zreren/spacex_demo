@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import { useEffect, useRef, useState } from "react";
 import { muiConfig } from "./assets/config";
 import "./App.css";
@@ -35,7 +35,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 // 类型定义
 import type { IDoc, IResponse } from "./types/api";
-import type { launchStatus } from "./types/common";
+import type { LaunchStatus,SortType } from "./types/common";
 import type { DetailType } from "./types/common";
 
 /**
@@ -56,17 +56,18 @@ function App() {
 
   const [detail, setDetail] = useState<DetailType | null>();
 
+
   const [searchContent, setSearchContent] = React.useState<string>("");
   const [startDate, setStartDate] = useState<string>("2007-06-07");
   const [endDate, setEndDate] = useState<string>(currentDate);
-  const [launchStatus, setLaunchStatus] = useState<"all" | "true" | "false">(
+  const [launchStatus, setLaunchStatus] = useState<LaunchStatus>(
     "all"
   );
-  const [sort, setSort] = useState<string>("desc");
+  const [sort, setSort] = useState<SortType>("desc");
 
   const customTheme = () => createTheme(muiConfig);
 
-  const lastItemRef = useRef(null);
+  const lastItemRef:MutableRefObject<null> = useRef(null);
 
   /**
    * 观察是否到底部进行自动加载下一页
@@ -329,7 +330,7 @@ function App() {
                     value={launchStatus}
                     label="发射状态"
                     onChange={(e) =>
-                      setLaunchStatus(e.target.value as launchStatus)
+                      setLaunchStatus(e.target.value as LaunchStatus)
                     }
                   >
                     <MenuItem value="all">全部</MenuItem>
@@ -347,7 +348,7 @@ function App() {
                   id="launchStatus"
                   value={sort}
                   label="发射状态"
-                  onChange={(e) => setSort(e.target.value)}
+                  onChange={(e) => setSort(e.target.value as SortType)}
                 >
                   <MenuItem value={"desc"}>从近到远</MenuItem>
                   <MenuItem value={"asc"}>从远到近</MenuItem>
