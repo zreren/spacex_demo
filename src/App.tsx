@@ -157,7 +157,7 @@ function App() {
    */
   const { data, isFetching, refetch, fetchNextPage, hasNextPage, error } =
     useInfiniteQuery<IResponse>(
-      ["query", searchContent, sort, startDate, endDate, launchStatus],
+      ["query", searchContent],
       fetchingData,
       {
         enabled: false,
@@ -258,7 +258,7 @@ function App() {
                 sm: "row",
               },
               paddingTop: 3,
-              background: "rgba(20,20,20,0.8)",
+              background: "rgba(40,40,40,0.8)",
               backdropFilter: "blur(20px)",
               alignItems: "center",
               zIndex: 99,
