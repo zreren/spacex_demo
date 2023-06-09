@@ -40,10 +40,10 @@ import type { DetailType } from "./types/common";
 
 /**
  * 睡眠函数
- * @param ms 
- * @returns 
+ * @param ms
+ * @returns
  */
-function sleep(ms: number):Promise<void> {
+function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -156,26 +156,22 @@ function App() {
    * useInfiniteQuery进行分页加载及数据处理
    */
   const { data, isFetching, refetch, fetchNextPage, hasNextPage, error } =
-    useInfiniteQuery<IResponse>(
-      ["query", searchContent],
-      fetchingData,
-      {
-        enabled: false,
-        getNextPageParam: (lastPage) => {
-          if (!lastPage?.hasNextPage) {
-            return undefined;
-          } else {
-            return lastPage.nextPage;
-          }
-        },
-      }
-    );
+    useInfiniteQuery<IResponse>(["query", searchContent], fetchingData, {
+      enabled: false,
+      getNextPageParam: (lastPage) => {
+        if (!lastPage?.hasNextPage) {
+          return undefined;
+        } else {
+          return lastPage.nextPage;
+        }
+      },
+    });
 
   /**
    * 重新加载
    */
   const handleSearch = async (): Promise<void> => {
-    console.log("handleSearch")
+    console.log("handleSearch");
     setShouldRefetch(true);
   };
 
@@ -194,7 +190,6 @@ function App() {
    * @param item {IDoc}
    */
   const handleClickItem = (item: IDoc): void => {
-    
     // 过滤数据 保留需要的字段
     const {
       name,
@@ -269,7 +264,7 @@ function App() {
               sx={{
                 color: "white",
                 whiteSpace: "nowrap",
-                width: 140
+                width: 140,
               }}
             >
               Space X
@@ -287,56 +282,64 @@ function App() {
             />
             <Grid
               container
+              columns={{
+                xs:2,
+                md:4
+              }}
               maxWidth={610}
+              paddingX={1}
               justifyContent="center"
               alignItems="center"
             >
-             <Grid>
-             <TextField
-                id="startDate"
-                label="开始发射时间"
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-             </Grid>
+              <Grid item xs={1} display={"flex"} justifyContent={"flex-end"}>
+                <TextField
+                  id="startDate"
+                  label="开始发射时间"
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
 
-             <Grid>
-               <TextField
-                id="endDate"
-                label="结束发射时间"
-                type="date"
-                sx={{ color: "white" }}
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-             </Grid>
+              <Grid item xs={1} display={"flex"} justifyContent={"flex-start"}>
+                <TextField
+                  id="endDate"
+                  label="结束发射时间"
+                  type="date"
+                  sx={{ color: "white" }}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
 
-              <FormControl sx={{ width: 150 }}>
-                <InputLabel color="info" id="launchStatus">
-                  发射状态
-                </InputLabel>
-                <Select
-                  labelId="launchStatus"
-                  id="launchStatus"
-                  value={launchStatus}
-                  label="发射状态"
-                  onChange={(e) =>
-                    setLaunchStatus(e.target.value as launchStatus)
-                  }
-                >
-                  <MenuItem value="all">全部</MenuItem>
-                  <MenuItem value="true">成功</MenuItem>
-                  <MenuItem value="false">失败</MenuItem>
-                </Select>
-              </FormControl>
+              <Grid item xs={1} display={"flex"} justifyContent={"flex-end"}>
+                <FormControl sx={{ width: 150 }}>
+                  <InputLabel color="info" id="launchStatus">
+                    发射状态
+                  </InputLabel>
+                  <Select
+                    labelId="launchStatus"
+                    id="launchStatus"
+                    value={launchStatus}
+                    label="发射状态"
+                    onChange={(e) =>
+                      setLaunchStatus(e.target.value as launchStatus)
+                    }
+                  >
+                    <MenuItem value="all">全部</MenuItem>
+                    <MenuItem value="true">成功</MenuItem>
+                    <MenuItem value="false">失败</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
 
+              <Grid item xs={1} display={"flex"} justifyContent={"flex-start"}>
               <FormControl sx={{ width: 150 }}>
                 <InputLabel id="launchStatus">排序</InputLabel>
                 <Select
@@ -350,6 +353,8 @@ function App() {
                   <MenuItem value={"asc"}>从远到近</MenuItem>
                 </Select>
               </FormControl>
+              </Grid>
+
             </Grid>
 
             <button onClick={handleSearch}>筛选</button>
@@ -373,7 +378,6 @@ function App() {
             <Fab
               onClick={scrollToTop}
               sx={{ position: "fixed", bottom: 30, right: 50, opacity: 0.6 }}
-
               aria-label="add"
             >
               <KeyboardArrowUpIcon></KeyboardArrowUpIcon>
